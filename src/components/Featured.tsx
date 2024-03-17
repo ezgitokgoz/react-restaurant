@@ -1,8 +1,26 @@
-import { featuredProducts } from "@/data";
+import { ProductType } from "@/types/types";
 import Image from "next/image";
 import React from "react";
 
-const Featured = () => {
+
+const getData = async () => {      //bir HTTP isteği yaparak belirtilen URL'den kategorilerle ilgili veri alma
+  const res = await fetch (`http://localhost:3000/api/products`,{  //istek asenkron yapildigindan "await" ile bekleniyor
+    cache:"no-store"  //onbellek kullanilmasın, her zaman guncel veri alinsin
+  })
+  if(!res.ok){  //http yaniti basarisiz ise (res.ok degilse)
+    throw new Error("Faileddd!");   //hata olusturur
+  }
+  return res.json() //http yaniti basarili ise json formatindaki verileri almak icin res.json() cagirilir ve döndürülür 
+}
+
+
+
+
+const Featured = async() => {
+
+  const featuredProducts:ProductType[] = await getData();
+
+
   return (
     <div className="w-screen overflow-x-scroll text-orange-500">
       {/* WRAPPER */}
