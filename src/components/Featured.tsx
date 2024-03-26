@@ -13,14 +13,8 @@ const getData = async () => {      //bir HTTP isteği yaparak belirtilen URL'den
   return res.json() //http yaniti basarili ise json formatindaki verileri almak icin res.json() cagirilir ve döndürülür 
 }
 
-
-
-
 const Featured = async() => {
-
   const featuredProducts:ProductType[] = await getData();
-
-
   return (
     <div className="w-screen overflow-x-scroll text-orange-500">
       {/* WRAPPER */}
